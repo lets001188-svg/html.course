@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HTML 기초 온라인 강의 - 강의 소개</title>
+  <style>
+    :root {
+      --navy-950: #0b132b;
+      --navy-900: #111d42;
+      --navy-800: #1c2e63;
+      --navy-700: #2a4082;
+      --purple-700: #5b21b6;
+      --purple-600: #6d28d9;
+      --purple-500: #7c3aed;
+      --purple-100: #ede9fe;
+      --purple-50: #f5f3ff;
+      --slate-900: #0f172a;
+      --slate-700: #334155;
+      --slate-600: #475569;
+      --slate-200: #e2e8f0;
+      --slate-100: #f1f5f9;
+      --white: #ffffff;
+      --shadow-sm: 0 2px 8px rgba(11, 19, 43, 0.06);
+      --shadow-md: 0 10px 26px rgba(11, 19, 43, 0.10);
+      --radius-lg: 18px;
+      --radius-md: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: "Pretendard", "Malgun Gothic", "Apple SD Gothic Neo", -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--slate-900);
+      background-color: #f8fafc;
+      line-height: 1.7;
+      word-break: keep-all;
+    }
+
+    /* 상단 내비게이션 (고정 목차 바) */
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(11, 19, 43, 0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .nav-inner {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0.85rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .brand-title {
+      color: var(--white);
+      font-size: 1.15rem;
+      font-weight: 800;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+    }
+
+    .brand-badge {
+      background: linear-gradient(135deg, var(--purple-500), #9333ea);
+      color: var(--white);
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      letter-spacing: 0.02em;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      display: inline-block;
+      color: #dbeafe;
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 600;
+      padding: 0.45rem 0.95rem;
+      border-radius: 999px;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible,
+    .nav-links a.active {
+      background-color: var(--purple-600);
+      color: var(--white);
+      outline: none;
+    }
+
+    /* 히어로 영역: 강의명 & 강사 소개 */
+    .hero {
+      background: linear-gradient(135deg, var(--navy-950) 0%, var(--navy-800) 58%, #311b6b 100%);
+      color: var(--white);
+      padding: 4.5rem 1.5rem 4.2rem;
+    }
+
+    .container {
+      max-width: 1140px;
+      margin: 0 auto;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.35fr 0.95fr;
+      gap: 2.2rem;
+      align-items: center;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(124, 58, 237, 0.24);
+      border: 1px solid rgba(196, 181, 253, 0.4);
+      color: #ede9fe;
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 0.4rem 1rem;
+      border-radius: 999px;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.1rem, 4.2vw, 3.35rem);
+      font-weight: 800;
+      line-height: 1.22;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.15rem;
+    }
+
+    .hero-desc {
+      font-size: clamp(1.1rem, 1.8vw, 1.3rem);
+      color: #e2e8f0;
+      margin-bottom: 1.9rem;
+      max-width: 620px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 0.9rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--purple-500);
+      color: var(--white);
+      text-decoration: none;
+      font-size: 1.08rem;
+      font-weight: 700;
+      padding: 0.9rem 1.65rem;
+      border-radius: var(--radius-md);
+      box-shadow: 0 8px 20px rgba(124, 58, 237, 0.35);
+      transition: transform 0.2s ease, background-color 0.2s ease;
+    }
+
+    .btn-primary:hover {
+      background: var(--purple-600);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      color: var(--white);
+      text-decoration: none;
+      font-size: 1.08rem;
+      font-weight: 600;
+      padding: 0.9rem 1.55rem;
+      border-radius: var(--radius-md);
+      transition: background-color 0.2s ease;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.18);
+    }
+
+    /* 강사 소개 카드 */
+    .instructor-card {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      backdrop-filter: blur(6px);
+    }
+
+    .instructor-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .instructor-avatar {
+      width: 58px;
+      height: 58px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--purple-500), #4f46e5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--white);
+      flex-shrink: 0;
+    }
+
+    .instructor-label {
+      display: block;
+      font-size: 0.9rem;
+      color: #c4b5fd;
+      font-weight: 700;
+      margin-bottom: 0.15rem;
+    }
+
+    .instructor-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--white);
+    }
+
+    .instructor-list {
+      list-style: none;
+      display: grid;
+      gap: 0.85rem;
+      font-size: 1.05rem;
+      color: #f1f5f9;
+    }
+
+    .instructor-list li {
+      background: rgba(11, 19, 43, 0.42);
+      padding: 0.85rem 1rem;
+      border-radius: 10px;
+      border-left: 4px solid #a78bfa;
+    }
+
+    .instructor-list strong {
+      display: block;
+      color: #ddd6fe;
+      font-size: 0.95rem;
+      margin-bottom: 0.15rem;
+    }
+
+    /* 공통 섹션 스타일 */
+    section.content-section {
+      padding: 4.2rem 1.5rem;
+      scroll-margin-top: 72px;
+    }
+
+    section.content-section.alt-bg {
+      background-color: var(--white);
+      border-top: 1px solid var(--slate-200);
+      border-bottom: 1px solid var(--slate-200);
+    }
+
+    .section-head {
+      margin-bottom: 2.3rem;
+    }
+
+    .section-tag {
+      display: inline-block;
+      background: var(--purple-100);
+      color: var(--purple-700);
+      font-size: 0.95rem;
+      font-weight: 800;
+      padding: 0.3rem 0.85rem;
+      border-radius: 999px;
+      margin-bottom: 0.65rem;
+    }
+
+    .section-head h2 {
+      font-size: clamp(1.75rem, 3vw, 2.35rem);
+      font-weight: 800;
+      color: var(--navy-900);
+      line-height: 1.3;
+      margin-bottom: 0.55rem;
+    }
+
+    .section-head p {
+      font-size: 1.12rem;
+      color: var(--slate-600);
+    }
+
+    /* 빠른 목차 이동 배너 */
+    .quick-toc {
+      background: var(--white);
+      border: 2px solid var(--purple-100);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 2.5rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .quick-toc-title {
+      font-size: 1.08rem;
+      font-weight: 800;
+      color: var(--navy-900);
+      margin-bottom: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .toc-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+    }
+
+    .toc-chips a {
+      text-decoration: none;
+      background: var(--purple-50);
+      color: var(--navy-800);
+      border: 1px solid #ddd6fe;
+      font-size: 1.02rem;
+      font-weight: 700;
+      padding: 0.55rem 1.05rem;
+      border-radius: 10px;
+      transition: all 0.2s ease;
+    }
+
+    .toc-chips a:hover {
+      background: var(--purple-600);
+      border-color: var(--purple-600);
+      color: var(--white);
+    }
+
+    /* 학습 목표 카드 */
+    .goal-highlight {
+      background: linear-gradient(135deg, var(--navy-900), var(--navy-800));
+      color: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 2rem 2.2rem;
+      margin-bottom: 1.8rem;
+      box-shadow: var(--shadow-md);
+      border-left: 6px solid var(--purple-500);
+    }
+
+    .goal-highlight h3 {
+      font-size: 1.2rem;
+      color: #c4b5fd;
+      margin-bottom: 0.5rem;
+    }
+
+    .goal-highlight p {
+      font-size: clamp(1.18rem, 2vw, 1.42rem);
+      font-weight: 700;
+      line-height: 1.6;
+    }
+
+    .goal-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.35rem;
+    }
+
+    .goal-card {
+      background: var(--white);
+      border: 1px solid var(--slate-200);
+      border-radius: var(--radius-md);
+      padding: 1.65rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .goal-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: var(--purple-100);
+      color: var(--purple-700);
+      font-weight: 800;
+      font-size: 1.1rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .goal-card h4 {
+      font-size: 1.22rem;
+      color: var(--navy-900);
+      margin-bottom: 0.45rem;
+    }
+
+    .goal-card p {
+      font-size: 1.05rem;
+      color: var(--slate-700);
+    }
+
+    /* 강의 목차 (아코디언/펼치기 지원) */
+    .curriculum-controls {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 1rem;
+    }
+
+    .toggle-all-btn {
+      background: var(--navy-900);
+      color: var(--white);
+      border: none;
+      font-size: 0.98rem;
+      font-weight: 700;
+      padding: 0.6rem 1.15rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .toggle-all-btn:hover {
+      background: var(--purple-600);
+    }
+
+    .curriculum-list {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .module-item {
+      background: #f8fafc;
+      border: 1px solid var(--slate-200);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .module-item.open {
+      border-color: var(--purple-500);
+      background: var(--white);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .module-header {
+      width: 100%;
+      background: transparent;
+      border: none;
+      text-align: left;
+      padding: 1.35rem 1.6rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .module-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .step-badge {
+      background: var(--navy-900);
+      color: var(--white);
+      font-size: 0.95rem;
+      font-weight: 800;
+      padding: 0.35rem 0.85rem;
+      border-radius: 8px;
+      flex-shrink: 0;
+    }
+
+    .module-item.open .step-badge {
+      background: var(--purple-600);
+    }
+
+    .module-title {
+      font-size: 1.28rem;
+      font-weight: 800;
+      color: var(--navy-900);
+    }
+
+    .module-arrow {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--purple-600);
+      transition: transform 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .module-item.open .module-arrow {
+      transform: rotate(180deg);
+    }
+
+    .module-body {
+      display: none;
+      padding: 0 1.6rem 1.5rem 1.6rem;
+      border-top: 1px solid var(--slate-200);
+      margin-top: 0.1rem;
+      padding-top: 1.15rem;
+      font-size: 1.08rem;
+      color: var(--slate-700);
+    }
+
+    .module-item.open .module-body {
+      display: block;
+    }
+
+    .module-keywords {
+      margin-top: 0.75rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .keyword-pill {
+      background: var(--purple-50);
+      color: var(--purple-700);
+      border: 1px solid #ddd6fe;
+      font-size: 0.92rem;
+      font-weight: 700;
+      padding: 0.25rem 0.7rem;
+      border-radius: 6px;
+    }
+
+    /* 수강 안내 */
+    .guide-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    .guide-card {
+      background: var(--white);
+      border: 1px solid var(--slate-200);
+      border-radius: var(--radius-lg);
+      padding: 1.9rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .guide-card h3 {
+      font-size: 1.32rem;
+      font-weight: 800;
+      color: var(--navy-900);
+      margin-bottom: 1rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid var(--purple-100);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .guide-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--purple-600);
+      display: inline-block;
+    }
+
+    .guide-list {
+      list-style: none;
+      display: grid;
+      gap: 0.85rem;
+      font-size: 1.08rem;
+      color: var(--slate-700);
+    }
+
+    .guide-list li {
+      position: relative;
+      padding-left: 1.35rem;
+    }
+
+    .guide-list li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--purple-600);
+      font-weight: 800;
+    }
+
+    /* 하단 푸터 */
+    footer {
+      background: var(--navy-950);
+      color: #cbd5e1;
+      padding: 2.4rem 1.5rem;
+      text-align: center;
+      font-size: 1rem;
+    }
+
+    footer strong {
+      color: var(--white);
+    }
+
+    .back-to-top {
+      display: inline-block;
+      margin-top: 0.9rem;
+      color: #c4b5fd;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.98rem;
+    }
+
+    .back-to-top:hover {
+      text-decoration: underline;
+    }
+
+    /* 빔프로젝터 등 대형 화면 가독성 강화 */
+    @media (min-width: 1400px) {
+      html {
+        font-size: 18px;
+      }
+      .container,
+      .nav-inner {
+        max-width: 1280px;
+      }
+    }
+
+    /* 태블릿 및 모바일 반응형 */
+    @media (max-width: 900px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+      .goal-grid {
+        grid-template-columns: 1fr;
+      }
+      .guide-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .nav-inner {
+        padding: 0.75rem 1rem;
+      }
+      .nav-links {
+        width: 100%;
+        justify-content: space-between;
+      }
+      .nav-links a {
+        font-size: 0.92rem;
+        padding: 0.4rem 0.65rem;
+      }
+      .hero {
+        padding: 3.2rem 1.1rem 3rem;
+      }
+      section.content-section {
+        padding: 3rem 1.1rem;
+      }
+      .module-header {
+        padding: 1.1rem 1.15rem;
+      }
+      .module-title {
+        font-size: 1.12rem;
+      }
+    }
+  </style>
+</head>
+<body id="top">
+
+  <!-- 상단 고정 내비게이션 -->
+  <header class="top-nav">
+    <div class="nav-inner">
+      <a href="#top" class="brand-title">
+        <span class="brand-badge">입문 과정</span>
+        <span>HTML 기초 온라인 강의</span>
+      </a>
+      <nav aria-label="강의 페이지 주요 목차">
+        <ul class="nav-links">
+          <li><a href="#intro" class="nav-link">강의·강사 소개</a></li>
+          <li><a href="#goals" class="nav-link">학습 목표</a></li>
+          <li><a href="#curriculum" class="nav-link">강의 목차</a></li>
+          <li><a href="#guide" class="nav-link">수강 안내</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- 1. 강의명 및 강사 소개 -->
+  <section id="intro" class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div>
+          <span class="hero-eyebrow">코딩 입문 성인 수강생 맞춤 과정</span>
+          <h1>HTML 기초 온라인 강의</h1>
+          <p class="hero-desc">
+            웹페이지가 어떤 구조로 만들어지는지 처음부터 차근차근 배웁니다.
+            복잡한 개발 지식 없이도 HTML의 핵심 원리를 이해하고, 나만의 단일 웹페이지를 구성하는 첫걸음을 함께합니다.
+          </p>
+          <div class="hero-actions">
+            <a href="#curriculum" class="btn-primary">강의 목차 바로 보기</a>
+            <a href="#guide" class="btn-secondary">수강 안내 확인하기</a>
+          </div>
+        </div>
+
+        <aside class="instructor-card" aria-label="강사 소개">
+          <div class="instructor-header">
+            <div class="instructor-avatar" aria-hidden="true">&lt;/&gt;</div>
+            <div>
+              <span class="instructor-label">INSTRUCTOR</span>
+              <h2 class="instructor-title">강사 소개</h2>
+            </div>
+          </div>
+          <ul class="instructor-list">
+            <li>
+              <strong>강의 분야</strong>
+              웹 기초(HTML) 입문 및 성인 학습자 대상 기초 디지털·웹페이지 제작 교육
+            </li>
+            <li>
+              <strong>강의 특징</strong>
+              어려운 전문 용어를 쉬운 일상 언어로 풀어 설명하며, 화면 구조를 눈으로 직접 확인하면서 따라 할 수 있도록 단계별로 안내합니다.
+            </li>
+            <li>
+              <strong>수업 진행 방식</strong>
+              핵심 개념 이해 후 짧은 예제를 직접 작성해 보며 스스로 페이지를 완성하는 실습 중심 수업입니다.
+            </li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. 학습 목표 -->
+  <section id="goals" class="content-section">
+    <div class="container">
+
+      <!-- 본문 상단 빠른 목차 이동 -->
+      <div class="quick-toc" aria-label="단원별 바로가기">
+        <div class="quick-toc-title">목차 바로가기 (클릭하면 해당 영역으로 이동합니다)</div>
+        <div class="toc-chips">
+          <a href="#intro">1. 강의명 및 강사 소개</a>
+          <a href="#goals">2. 학습 목표</a>
+          <a href="#curriculum">3. 강의 목차 (5단계)</a>
+          <a href="#guide">4. 수강 대상 및 수강 안내</a>
+        </div>
+      </div>
+
+      <div class="section-head">
+        <span class="section-tag">LEARNING GOALS</span>
+        <h2>학습 목표</h2>
+        <p>강의를 마친 뒤 수강생이 스스로 할 수 있게 되는 핵심 역량입니다.</p>
+      </div>
+
+      <div class="goal-highlight">
+        <h3>핵심 학습 목표</h3>
+        <p>
+          “HTML 문서의 기본 구조와 자주 쓰는 요소를 이해하고, 간단한 단일 페이지의 구성 원리를 익힙니다.”
+        </p>
+      </div>
+
+      <div class="goal-grid">
+        <article class="goal-card">
+          <div class="goal-num">01</div>
+          <h4>HTML 기본 뼈대 이해</h4>
+          <p>웹 브라우저가 문서를 읽고 화면에 표시하기 위해 필요한 기본 문서 구조를 정확히 파악합니다.</p>
+        </article>
+        <article class="goal-card">
+          <div class="goal-num">02</div>
+          <h4>자주 쓰는 핵심 요소 활용</h4>
+          <p>제목, 문단, 링크 등 웹페이지의 내용을 구성하는 필수 태그의 역할과 올바른 쓰임새를 익힙니다.</p>
+        </article>
+        <article class="goal-card">
+          <div class="goal-num">03</div>
+          <h4>단일 웹페이지 구성 원리 습득</h4>
+          <p>영역을 나누고 기본적인 스타일을 연결하여, 한눈에 읽히는 단일 웹페이지의 전체 흐름을 설계합니다.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. 강의 목차 -->
+  <section id="curriculum" class="content-section alt-bg">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-tag">CURRICULUM</span>
+        <h2>강의 목차</h2>
+        <p>총 5개 단원으로 구성되어 있으며, 각 단원을 클릭하면 세부 학습 내용을 확인할 수 있습니다.</p>
+      </div>
+
+      <div class="curriculum-controls">
+        <button type="button" id="toggleAllBtn" class="toggle-all-btn">모든 단원 펼치기</button>
+      </div>
+
+      <div class="curriculum-list" id="curriculumList">
+        <!-- 1단원 -->
+        <article class="module-item open">
+          <button type="button" class="module-header" aria-expanded="true">
+            <div class="module-title-wrap">
+              <span class="step-badge">1강</span>
+              <h3 class="module-title">HTML이란?</h3>
+            </div>
+            <span class="module-arrow" aria-hidden="true">▼</span>
+          </button>
+          <div class="module-body">
+            <p>웹사이트가 화면에 보이는 원리를 이해하고, 웹 문서의 뼈대를 만드는 마크업 언어인 HTML의 역할과 태그(Tag)의 기본 개념을 배웁니다.</p>
+            <div class="module-keywords">
+              <span class="keyword-pill">웹페이지의 원리</span>
+              <span class="keyword-pill">HTML의 역할</span>
+              <span class="keyword-pill">태그 기본 개념</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 2단원 -->
+        <article class="module-item">
+          <button type="button" class="module-header" aria-expanded="false">
+            <div class="module-title-wrap">
+              <span class="step-badge">2강</span>
+              <h3 class="module-title">문서의 기본 구조</h3>
+            </div>
+            <span class="module-arrow" aria-hidden="true">▼</span>
+          </button>
+          <div class="module-body">
+            <p>모든 HTML 파일이 공통으로 가지는 기본 틀(문서 선언, html, head, body 영역)을 살펴보고, 설정 정보와 실제 화면에 보이는 영역의 차이를 익힙니다.</p>
+            <div class="module-keywords">
+              <span class="keyword-pill">&lt;!DOCTYPE html&gt;</span>
+              <span class="keyword-pill">&lt;head&gt;와 &lt;body&gt;</span>
+              <span class="keyword-pill">문서 저장과 실행</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 3단원 -->
+        <article class="module-item">
+          <button type="button" class="module-header" aria-expanded="false">
+            <div class="module-title-wrap">
+              <span class="step-badge">3강</span>
+              <h3 class="module-title">제목·문단·링크</h3>
+            </div>
+            <span class="module-arrow" aria-hidden="true">▼</span>
+          </button>
+          <div class="module-body">
+            <p>글의 위계를 나누는 제목 태그, 읽기 좋은 본문을 만드는 문단 태그, 다른 페이지나 페이지 내 특정 위치로 이동시키는 링크 작성법을 실습합니다.</p>
+            <div class="module-keywords">
+              <span class="keyword-pill">제목 태그 (&lt;h1&gt;~&lt;h3&gt;)</span>
+              <span class="keyword-pill">문단 태그 (&lt;p&gt;)</span>
+              <span class="keyword-pill">하이퍼링크 (&lt;a&gt;)</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 4단원 -->
+        <article class="module-item">
+          <button type="button" class="module-header" aria-expanded="false">
+            <div class="module-title-wrap">
+              <span class="step-badge">4강</span>
+              <h3 class="module-title">화면 구성과 스타일</h3>
+            </div>
+            <span class="module-arrow" aria-hidden="true">▼</span>
+          </button>
+          <div class="module-body">
+            <p>내용을 구역별로 묶어 정돈된 화면 구조를 만드는 방법과, 글자 크기·색상·여백 등 기본 스타일을 적용해 가독성을 높이는 원리를 익힙니다.</p>
+            <div class="module-keywords">
+              <span class="keyword-pill">영역 나누기</span>
+              <span class="keyword-pill">색상과 글자 크기</span>
+              <span class="keyword-pill">여백과 정렬 기초</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 5단원 -->
+        <article class="module-item">
+          <button type="button" class="module-header" aria-expanded="false">
+            <div class="module-title-wrap">
+              <span class="step-badge">5강</span>
+              <h3 class="module-title">배운 내용 정리</h3>
+            </div>
+            <span class="module-arrow" aria-hidden="true">▼</span>
+          </button>
+          <div class="module-body">
+            <p>1강부터 4강까지 배운 요소를 하나로 모아 간단한 단일 소개 페이지를 완성해 보고, 자주 실수하는 부분을 점검하며 전체 내용을 복습합니다.</p>
+            <div class="module-keywords">
+              <span class="keyword-pill">단일 페이지 완성</span>
+              <span class="keyword-pill">코드 점검 포인트</span>
+              <span class="keyword-pill">핵심 요약 정리</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. 수강 안내 -->
+  <section id="guide" class="content-section">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-tag">COURSE GUIDE</span>
+        <h2>수강 안내</h2>
+        <p>처음 코딩을 접하는 성인 학습자도 부담 없이 참여할 수 있도록 안내해 드립니다.</p>
+      </div>
+
+      <div class="guide-grid">
+        <article class="guide-card">
+          <h3><span class="guide-dot" aria-hidden="true"></span>추천 수강 대상</h3>
+          <ul class="guide-list">
+            <li>HTML과 웹페이지 제작을 처음 배우는 성인 학습자</li>
+            <li>코딩 경험은 없지만 웹사이트가 만들어지는 원리를 기초부터 알고 싶은 분</li>
+            <li>간단한 단일 소개 웹페이지를 직접 구성해 보고 싶은 분</li>
+            <li>기초 용어부터 천천히, 반복 설명이 있는 수업을 선호하는 분</li>
+          </ul>
+        </article>
+
+        <article class="guide-card">
+          <h3><span class="guide-dot" aria-hidden="true"></span>수강 준비 및 진행 안내</h3>
+          <ul class="guide-list">
+            <li><strong>수업 형태:</strong> 온라인 강의 (PC 또는 노트북 화면을 보며 실습 병행 권장)</li>
+            <li><strong>준비 사항:</strong> 인터넷 연결이 가능한 PC(또는 노트북)와 웹 브라우저</li>
+            <li><strong>선수 지식:</strong> 별도의 사전 코딩 지식이 필요하지 않습니다.</li>
+            <li><strong>학습 팁:</strong> 강의 중 나오는 짧은 예제를 직접 입력해 보면 이해가 훨씬 빠릅니다.</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 푸터 -->
+  <footer>
+    <div class="container">
+      <p><strong>HTML 기초 온라인 강의</strong> · 코딩을 처음 배우는 성인 수강생을 위한 입문 안내 페이지</p>
+      <a href="#top" class="back-to-top">↑ 화면 맨 위로 이동</a>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      // 1. 강의 목차 개별 아코디언 토글
+      const moduleItems = document.querySelectorAll(".module-item");
+      const toggleAllBtn = document.getElementById("toggleAllBtn");
+
+      function updateToggleAllText() {
+        const allOpen = Array.from(moduleItems).every((item) =>
+          item.classList.contains("open")
+        );
+        toggleAllBtn.textContent = allOpen ? "모든 단원 접기" : "모든 단원 펼치기";
+      }
+
+      moduleItems.forEach((item) => {
+        const headerBtn = item.querySelector(".module-header");
+        headerBtn.addEventListener("click", () => {
+          const isOpen = item.classList.toggle("open");
+          headerBtn.setAttribute("aria-expanded", String(isOpen));
+          updateToggleAllText();
+        });
+      });
+
+      // 2. 모든 단원 한 번에 펼치기 / 접기
+      toggleAllBtn.addEventListener("click", () => {
+        const shouldOpenAll = !Array.from(moduleItems).every((item) =>
+          item.classList.contains("open")
+        );
+        moduleItems.forEach((item) => {
+          item.classList.toggle("open", shouldOpenAll);
+          const headerBtn = item.querySelector(".module-header");
+          headerBtn.setAttribute("aria-expanded", String(shouldOpenAll));
+        });
+        updateToggleAllText();
+      });
+
+      // 3. 스크롤 위치에 따른 상단 목차 활성 표시
+      const sections = document.querySelectorAll("section[id]");
+      const navLinks = document.querySelectorAll(".nav-link");
+
+      function highlightCurrentNav() {
+        const scrollPos = window.scrollY + 140;
+        let currentId = "";
+
+        sections.forEach((sec) => {
+          if (
+            scrollPos >= sec.offsetTop &&
+            scrollPos < sec.offsetTop + sec.offsetHeight
+          ) {
+            currentId = sec.getAttribute("id");
+          }
+        });
+
+        navLinks.forEach((link) => {
+          const hrefId = link.getAttribute("href").replace("#", "");
+          link.classList.toggle("active", hrefId === currentId);
+        });
+      }
+
+      window.addEventListener("scroll", highlightCurrentNav, { passive: true });
+      highlightCurrentNav();
+    })();
+  </script>
+</body>
+</html>
